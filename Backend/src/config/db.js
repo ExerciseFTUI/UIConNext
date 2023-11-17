@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 exports.connectDB = async function () {
-  const URI = process.env.MONDODB_URI;
+  const URI = process.env.MONGODB_URI;
   const connectionParams = {
     useUnifiedTopology: true,
   };
