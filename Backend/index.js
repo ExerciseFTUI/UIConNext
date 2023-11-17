@@ -20,6 +20,9 @@ app.use(
 
 // Routes used in the app
 app.use("/auth", authRoutes);
+app.get("/", (req, res) => {
+  res.send("UI ConNext Services");
+});
 
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
