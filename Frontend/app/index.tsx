@@ -1,12 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
 import Card from "../components/Card";
+import { Redirect } from "expo-router";
 
 export default function Home() {
   return (
-    <View className="">
-      <Text className="text-lime-500">Homes</Text>
-      <Card />
-    </View>
+    <Redirect href={"home"}/>
   );
 }
