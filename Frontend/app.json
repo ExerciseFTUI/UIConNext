@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Frontend",
-    "slug": "Frontend",
+    "name": "UIConNext-Bismillah",
+    "slug": "UIConNext-Bismillah",
+    "scheme": "UIConNext-Bismillah",
     "version": "1.0.0",
-    "scheme": "UI ConNext",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
