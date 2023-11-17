@@ -11,4 +11,8 @@ router.post('/register', authControllers.register);
 router.post('/login', authControllers.login);
 router.post('/logout', authControllers.logout);
 
+router.get('/', (req, res) => {
+    res.send('Auth routes');
+});
+
 module.exports = router;
