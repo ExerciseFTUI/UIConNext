@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Modal, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, Button } from 'react-native';
 import { AntDesign, FontAwesome5, Entypo } from '@expo/vector-icons';
 import Tweet from '../components/Tweet';
-import Profile from '../modals/Profile';
+import Profile from '../components/modals/Profile';
 
 export default function App() {
     const [isTriggered, setIsTriggered] = useState(false);
