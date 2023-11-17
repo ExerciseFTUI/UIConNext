@@ -23,8 +23,7 @@ export default function Profile({status, setStatus} : Props) {
 
                 {/* Avatar */}
                 <View className="items-center mt-36">
-                    // @ts-ignore
-                    <Image source={require("../assets/Avatar2.webp")} className=" w-80 h-80" />
+                    <Image source={require("../../assets/Avatar2.webp")} className=" w-80 h-80" />
                 <View className="border border-white w-full"></View>
                 </View>
                 {/* End of Avatar */}
