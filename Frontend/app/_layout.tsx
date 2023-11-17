@@ -6,9 +6,10 @@ const RootLayout = () => {
   return (
     <Stack>
       <Stack.Screen
-        name="index"
+        name="home"
         options={{
-          headerTitle: "Home",
+          // headerTitle: "Home",
+          headerShown: false
         }}
       />
     </Stack>
