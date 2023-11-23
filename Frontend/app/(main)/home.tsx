@@ -11,13 +11,21 @@ import {
   Button,
 } from "react-native";
 import { AntDesign, FontAwesome5, Entypo } from "@expo/vector-icons";
-import Tweet from "../components/Tweet";
-import Profile from "../components/modals/Profile";
+import Tweet from "../../components/Tweet";
+import Profile from "../../components/modals/Profile";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
+import { useAuth } from "@clerk/clerk-expo";
 
 export default function App() {
   const [isTriggered, setIsTriggered] = useState(false);
 
+  const { signOut } = useAuth();
+  const doLogout = () => {
+    signOut();
+  };
+
+  const router = useRouter();
   return (
     <>
       {/* <SafeAreaView style={{ flex: 0, backgroundColor: "#739072" }} /> */}
@@ -30,9 +38,19 @@ export default function App() {
               Click Here
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity className=" border-dark_green border rounded-lg p-3 bg-dark_green">
+            <Text className="text-white" onPress={() => doLogout()}>
+              Logout
+            </Text>
+          </TouchableOpacity>
         </View>
         {/* End of Header */}
 
+        {/* <TouchableOpacity className=" border-dark_green border rounded-lg p-3 bg-dark_green">
+          <Text className="text-white" onPress={() => router.push("/login")}>
+            Click Here
+          </Text>
+        </TouchableOpacity> */}
         <ScrollView className="mt-2">
           <Tweet></Tweet>
           <Tweet></Tweet>
