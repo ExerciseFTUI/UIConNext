@@ -20,6 +20,7 @@ import { useAuth } from "@clerk/clerk-expo";
 export default function App() {
   const [isTriggered, setIsTriggered] = useState(false);
   const [createTriggered, setCreateTriggered] = useState(false);
+  const [selectPost, setSelectPost] = useState("");
 
   const { signOut } = useAuth();
   const doLogout = () => {
@@ -53,15 +54,7 @@ export default function App() {
           </Text>
         </TouchableOpacity> */}
         <ScrollView showsVerticalScrollIndicator={false} className=' w-full px-3'>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
+          <Tweet/>
 
           {/* Modal User */}
           <Profile status={isTriggered} setStatus={setIsTriggered} />
@@ -72,13 +65,45 @@ export default function App() {
 
         {/* Button create Oink */}
         <TouchableOpacity onPress={() => setCreateTriggered((prev) => !prev)} className=' absolute bottom-14 right-7 flex justify-center items-center rounded-full bg-white border-light_green border-2 w-16 h-16'>
-            <Ionicons name="create" size={30} color="#3A4D39" />
+            {createTriggered === false ? 
+              <Ionicons name="create" size={30} color="#3A4D39" />
+              :
+              <AntDesign name="close" size={30} color="#3A4D39" />
+            }
         </TouchableOpacity>
         {/* End of Button create Oink */}
             
+        {/* Button to choose create Post */}
         {createTriggered && 
-        <View className="w-20 h-20 bg-yellow-300 absolute bottom-0" >
-
+        <View className="w-fit h-30 bg-white rounded-lg border-2 border-light_green absolute bottom-4 right-24" >
+          <TouchableOpacity 
+            className=" border-b-2 py-1 border-light_green w-full px-3"
+            onPress={() => {
+            setSelectPost("Oink");
+            setCreateTriggered(false);}}>
+            <Text className=" text-base font-semibold text-dark_green">Oink!</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            className=" border-b-2 py-1 border-light_green w-full px-3"
+            onPress={() => {
+            setSelectPost("Lost");
+            setCreateTriggered(false);}}>
+            <Text className=" text-base font-semibold text-dark_green">Lost</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            className=" border-b-2 py-1 border-light_green w-full px-3"
+            onPress={() => {
+            setSelectPost("Found");
+            setCreateTriggered(false);}}>
+            <Text className=" text-base font-semibold text-dark_green">Found</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            className=" w-full px-3 py-1"
+            onPress={() => {
+            setSelectPost("Parking"); 
+            setCreateTriggered(false);}}>
+            <Text className=" text-base font-semibold text-dark_green">Parking</Text>
+          </TouchableOpacity>
         </View>
         }
         {/* End Choice View */}
