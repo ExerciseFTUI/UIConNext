@@ -45,7 +45,7 @@ export default function App() {
             </Text>
           </TouchableOpacity>
         </View>
-        {/* End of Header */}
+        {/* End of Headerr */}
 
             <ScrollView showsVerticalScrollIndicator={false} className=' w-full px-3'>
                 <Tweet></Tweet>
