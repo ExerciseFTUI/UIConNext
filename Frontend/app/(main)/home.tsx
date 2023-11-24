@@ -31,14 +31,21 @@ export default function App() {
     <>
       {/* <SafeAreaView style={{ flex: 0, backgroundColor: "#739072" }} /> */}
       <SafeAreaView className="flex-1 items-center ">
-            {/* Header */}
-            <View className="px-5 items-center w-screen h-14 bg-light_green flex flex-row justify-between rounded-b-lg">
-                <Text className="text-2xl text-primary font-bold"> UI ConNext</Text>
-                <TouchableOpacity onPress={() => setIsTriggered(true)} className=" border-dark_green border rounded-lg p-3 bg-dark_green"> 
-                    <Text className="text-white"  >Click Here</Text>
-                </TouchableOpacity>
-            </View>
-            {/* End of Header */}
+        {/* Header */}
+        <View className="px-5 items-center w-screen h-14 bg-light_green flex flex-row justify-between rounded-b-lg">
+          <Text className="text-2xl text-primary font-bold"> UI ConNext</Text>
+          <TouchableOpacity onPress={() => setIsTriggered(true)} className=" border-dark_green border rounded-lg p-3 bg-dark_green">
+            <Text className="text-white">
+              Click Here
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => doLogout()} className=" border-dark_green border rounded-lg p-3 bg-dark_green">
+            <Text className="text-white" >
+              Logout +
+            </Text>
+          </TouchableOpacity>
+        </View>
+        {/* End of Header */}
 
             <ScrollView showsVerticalScrollIndicator={false} className=' w-full px-3'>
                 <Tweet></Tweet>

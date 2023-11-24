@@ -13,7 +13,7 @@ const InitialLayout = () => {
   useEffect(() => {
     if (!isLoaded) return;
 
-    const inTabsGroup = segments[0] === "(auth)";
+    const inTabsGroup = segments[0] === "(main)";
 
     console.log("User changed: ", isSignedIn);
 

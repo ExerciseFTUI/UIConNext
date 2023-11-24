@@ -47,7 +47,7 @@ const Signup = () => {
       // change the UI to verify the email address
       setPendingVerification(true);
       router.push({
-        pathname: "/Otp",
+        pathname: "/otp",
         params: { emailAddress: emailAddress },
       });
     } catch (err: any) {
