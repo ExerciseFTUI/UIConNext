@@ -40,7 +40,7 @@ export default function App() {
           </TouchableOpacity>
           <TouchableOpacity className=" border-dark_green border rounded-lg p-3 bg-dark_green">
             <Text className="text-white" onPress={() => doLogout()}>
-              Logout
+              Logout +
             </Text>
           </TouchableOpacity>
         </View>
