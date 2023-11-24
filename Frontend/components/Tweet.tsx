@@ -1,5 +1,5 @@
-import { Text, View, Image } from 'react-native'
-import { AntDesign, FontAwesome5, Entypo } from '@expo/vector-icons';
+import { Text, View, Image } from "react-native";
+import { AntDesign, FontAwesome5, Entypo } from "@expo/vector-icons";
 
 export default function Tweet(){
     return(
@@ -21,24 +21,23 @@ export default function Tweet(){
                     </View>
                     {/* End of Header Tweet */}
 
-                    {/* Massage Tweet */}
-                    <Text className="text-dark_green px-3 py-2 font-medium text-sm">Hallo semuanyaaa. Ini contoh tweet</Text>
-                    {/* End of Massage Tweet */}
-                
-                    {/* Footer */}
-                    <View className="px-3 py-2 justify-around flex flex-row">
-                        <AntDesign name="message1" size={18} color="#3A4D39" />
-                        <FontAwesome5 name="door-open" size={18} color="#3A4D39" />
-                        <AntDesign name="heart" size={18} color="#3A4D39" />
-                        <Entypo name="dots-three-horizontal" size={18} color="#3A4D39" />
-                    </View>
-                    {/* Footer */}
+          {/* Massage Tweet */}
+          <Text className="text-dark_green px-3 py-2 font-medium text-sm">
+            Hallo semuanyaaa. Ini contoh tweet
+          </Text>
+          {/* End of Massage Tweet */}
 
-                </View>
-                {/* End of Tweets */}
-
-            </View>
+          {/* Footer */}
+          <View className="px-3 py-2 justify-around flex flex-row">
+            <AntDesign name="message1" size={18} color="#3A4D39" />
+            <FontAwesome5 name="door-open" size={18} color="#3A4D39" />
+            <AntDesign name="heart" size={18} color="#3A4D39" />
+            <Entypo name="dots-three-horizontal" size={18} color="#3A4D39" />
+          </View>
+          {/* Footer */}
         </View>
-        
-    )
+        {/* End of Tweets */}
+      </View>
+    </View>
+  );
 }
