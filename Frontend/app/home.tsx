@@ -1,18 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { Modal, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, Image, Button } from 'react-native';
-import { AntDesign, FontAwesome5, Entypo, Ionicons } from '@expo/vector-icons';
-import Tweet from '../components/Tweet';
-import Profile from '../components/modals/Profile';
-import { Link } from 'expo-router';
-import setting from './setting';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+  Modal,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  Button,
+} from "react-native";
+import { AntDesign, FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
+import Tweet from "../components/Tweet";
+import Profile from "../components/modals/Profile";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
-    const [isTriggered, setIsTriggered] = useState(false);
+  const [isTriggered, setIsTriggered] = useState(false);
 
-    return (
-        <SafeAreaView className="flex-1 items-center "  >
-
+  return (
+    <>
+      {/* <SafeAreaView style={{ flex: 0, backgroundColor: "#739072" }} /> */}
+      <SafeAreaView className="flex-1 items-center ">
         {/* Header */}
         <View className="px-5 items-center w-screen h-14 bg-light_green flex flex-row justify-between rounded-b-lg">
             <Text className="text-2xl text-primary font-bold"> UI ConNext</Text>
@@ -39,7 +48,7 @@ export default function App() {
             setStatus={setIsTriggered} />
             {/* End of Modal User */}
 
-            <StatusBar style="auto" />
+          <StatusBar style="auto" />
         </ScrollView>
 
         {/* Button create Oink */}
@@ -49,6 +58,6 @@ export default function App() {
         {/* End of Button create Oink */}
 
         </SafeAreaView>
+        </>
     );
 }
-
