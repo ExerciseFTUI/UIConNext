@@ -1,27 +1,25 @@
 import { Text, View, Image } from "react-native";
 import { AntDesign, FontAwesome5, Entypo } from "@expo/vector-icons";
 
-export default function Tweet() {
-  return (
-    <View className="mb-3">
-      <View className="items-center">
-        {/* Tweets */}
-        <View className="w-screnn h-auto border-light_green border rounded-md">
-          {/* Header Tweet */}
-          <View className="w-screen px-3 py-1 bg-dark_green h-auto flex flex-row justify-between items-center">
-            <View className="flex flex-row">
-              <Image
-                source={require("../assets/Avatar2.webp")}
-                className="w-8 h-8 rounded-full"
-              ></Image>
-              <View className="pl-2">
-                <Text className="text-white text-sm font-normal">ur.head</Text>
-                <Text className="text-white text-xs font-light">Engineer</Text>
-              </View>
-            </View>
-            <Text className="text-white font-medium">Oink!</Text>
-          </View>
-          {/* End of Header Tweet */}
+export default function Tweet(){
+    return(
+        <View className="mb-3 mt-1" >
+            <View className="items-center">
+                {/* Tweets */}
+                <View className="w-full h-auto border-light_green border rounded-md">
+
+                    {/* Header Tweet */}
+                    <View className="w-full px-3 py-1 bg-dark_green h-auto flex flex-row justify-between items-center">
+                        <View className="flex flex-row">
+                            <Image source={require("../assets/Avatar2.webp")} className="w-8 h-8 border border-white rounded-full"></Image>
+                            <View className="pl-2">
+                                <Text className="text-white text-sm font-normal">ur.head</Text>
+                                <Text className="text-white text-xs font-light">Engineer</Text>
+                            </View>
+                        </View>
+                    <Text className="text-white font-medium">Oink!</Text>
+                    </View>
+                    {/* End of Header Tweet */}
 
           {/* Massage Tweet */}
           <Text className="text-dark_green px-3 py-2 font-medium text-sm">
