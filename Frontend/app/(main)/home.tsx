@@ -16,11 +16,12 @@ import Profile from "../../components/modals/Profile";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useAuth } from "@clerk/clerk-expo";
+import CreateOink from "../../components/modals/CreateOink";
 
 export default function App() {
   const [isTriggered, setIsTriggered] = useState(false);
   const [createTriggered, setCreateTriggered] = useState(false);
-  const [selectPost, setSelectPost] = useState("");
+  const [selectPost, setSelectPost] = useState("null");
 
   const { signOut } = useAuth();
   const doLogout = () => {
@@ -35,7 +36,7 @@ export default function App() {
         {/* Header */}
         <View className="px-5 items-center w-screen h-14 bg-light_green flex flex-row justify-between rounded-b-lg">
           <Text className="text-2xl text-primary font-bold"> UI ConNext</Text>
-          <TouchableOpacity onPress={() => setIsTriggered(true)} className=" border-dark_green border rounded-lg p-3 bg-dark_green">
+          <TouchableOpacity onPress={() => {setIsTriggered(true)}} className=" border-dark_green border rounded-lg p-3 bg-dark_green">
             <Text className="text-white" >
               Click Here
             </Text>
@@ -80,6 +81,8 @@ export default function App() {
             className=" border-b-2 py-1 border-light_green w-full px-3"
             onPress={() => {
             setSelectPost("Oink");
+            console.log(selectPost);
+            
             setCreateTriggered(false);}}>
             <Text className=" text-base font-semibold text-dark_green">Oink!</Text>
           </TouchableOpacity>
@@ -107,6 +110,8 @@ export default function App() {
         </View>
         }
         {/* End Choice View */}
+
+        <CreateOink selectPost={selectPost} setSelectPost={setSelectPost}/>
 
       </SafeAreaView>
     </>

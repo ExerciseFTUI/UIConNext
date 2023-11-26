@@ -3,14 +3,12 @@ import { AntDesign, FontAwesome5, Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 export default function Tweet(){
   const [datas, setDatas] = useState([])
   
   const getPost = async () => {
     try {
       const response = await axios.get('https://jsonplaceholder.typicode.com/posts')
-      console.log(response.data)
       setDatas(response.data)
     } catch (error) {
       console.log(error)
