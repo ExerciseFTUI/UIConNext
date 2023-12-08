@@ -40,13 +40,12 @@ exports.getUser = async function (body) {
 
 exports.register = async function (body) {
   const { ...user } = body;
-  if (!user.username || !user.password || !user.email) {
-    return { message: "Please fill all the fields" };
+  if (!user.name || !user.username || !user.email) {
+    return new Error("Please fill all the fields");
   }
-  if (user.password.length < process.env.PASSWORD_LENGTH) {
-    return { message: "Password must be at least 8 characters", result: null };
+  if (user.password) {
+    user.password = await bcrypt.hash(user.password, 10);
   }
-  user.password = await bcrypt.hash(user.password, 10);
   const result = new User({
     ...user,
   });
@@ -58,26 +57,15 @@ exports.login = async function (body) {
   const { email, password } = body;
   const user = await User.findOne({ email });
   if (!user) {
-    return { message: "User not found" };
+    return new Error("User not found");
   }
 
   const passwordCheck = await bcrypt.compare(password, user.password);
   if (!passwordCheck) {
-    return { message: "Password is not correct" };
+    return new Error("Password is not correct");
   }
 
-  const accessToken = generateAccessToken({ username: user.username });
-  const refreshToken = jwt.sign(
-    { email: user.email },
-    process.env.REFRESH_TOKEN_SECRET
-  );
-
-  if (refreshTokens.length > process.env.REFRESH_TOKEN_LIMIT) {
-    refreshTokens.shift();
-  }
-  refreshTokens.push(refreshToken);
-
-  return { accessToken: accessToken, refreshToken: refreshToken };
+  return { message: "Login successful", result: user };
 };
 
 exports.logout = async function (body) {
