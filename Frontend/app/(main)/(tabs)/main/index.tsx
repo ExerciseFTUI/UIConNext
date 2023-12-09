@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Tweet = () => {
+const Main = () => {
   return (
     <View>
-      <Text>Tweet</Text>
+      <Text>Main</Text>
     </View>
   );
 };
 
-export default Tweet;
+export default Main;
 
 const styles = StyleSheet.create({});
