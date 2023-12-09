@@ -4,6 +4,7 @@ import { Button, TouchableOpacity, Image, Text } from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useWarmUpBrowser } from "../hooks/warmUpBrowser";
 import COLORS from "../constants/colors";
+import { router } from "expo-router";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -24,6 +25,8 @@ const SignInWithOAuth = () => {
       } else {
         // Use signIn or signUp for next steps such as MFA
       }
+
+      router.replace("/main");
     } catch (err) {
       console.error("OAuth error", err);
     }

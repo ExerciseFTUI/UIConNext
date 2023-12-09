@@ -10,6 +10,8 @@ export default function Main() {
       <FlatList
         data={tweets}
         renderItem={({ item }) => <Post tweet={item} />}
+        overScrollMode="never"
+        showsVerticalScrollIndicator={false}
       />
 
       <Link href="/new-tweet" asChild>

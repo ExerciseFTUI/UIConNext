@@ -20,9 +20,12 @@ import {
 import { useRouter } from "expo-router";
 
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import { useAuth } from "@clerk/clerk-expo";
 
 export function CustomDrawerContent(props: any) {
   const router = useRouter();
+
+  const { signOut } = useAuth();
 
   return (
     <View style={{ flex: 1 }}>
@@ -119,7 +122,7 @@ export function CustomDrawerContent(props: any) {
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign Out"
-          onPress={() => alert("sign out")}
+          onPress={() => signOut()}
         />
       </Drawer.Section>
     </View>
@@ -164,7 +167,8 @@ const styles = StyleSheet.create({
   },
   bottomDrawerSection: {
     marginBottom: 15,
-    borderTopColor: "#f4f4f4",
+    borderColor: "#f4f4f4",
+    // borderTopColor: "#f4f4f4",
     borderTopWidth: 1,
   },
   preference: {
