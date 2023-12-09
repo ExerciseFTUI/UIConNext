@@ -10,7 +10,7 @@ exports.uploadImage = async function (file, body) {
 	if (!file) {
 		throw new Error("Please specify image");
 	}
-	const result = await cloudinaryConfig.uploads(file.path);
+	const result = await cloudinaryConfig.uploads(file.buffer);
 	if (!result) {
 		throw new Error("Image failed to be uploaded");
 	}
@@ -18,14 +18,9 @@ exports.uploadImage = async function (file, body) {
 		{ _id },
 		{
 			image: result.url,
-		}
+		},
+        {new: true}
 	);
-	fs.unlink(file.path, (error) => {
-		if (error) {
-			// Handle the error
-			throw new Error(error);
-		}
-	});
 	if (!user) {
 		throw new Error("User not found");
 	}
