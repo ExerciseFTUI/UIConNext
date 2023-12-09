@@ -8,9 +8,9 @@ const postsSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
     image: { type: String, required: false, unique: false },
     comments: [commentSchema],
-    impressions: { type: Number, required: false, unique: false },
-    numberOfLikes: { type: Number, required: false, unique: false },
-    numberOfRetweets: { type: Number, required: false, unique: false },
+    impressions: { type: Number, required: false, unique: false, default: 0 },
+    numberOfLikes: { type: Number, required: false, unique: false, default: 0 },
+    numberOfRetweets: { type: Number, required: false, unique: false, default: 0 },
 });
 
 const Posts = mongoose.model("Posts", postsSchema);

@@ -1,72 +1,122 @@
 const { Posts } = require("../models/Posts.models");
 const { User } = require("../models/User.models");
-const cloudinaryConfig = require("../config/cloudinary.config");
 
-exports.uploadImage = async function (files, body) {
-  // const { _id } = body;
-  // if(_id !== null || _id !== undefined) {
-  //   return { message: "Please specify _id", result: null };
-  // }
-  const result = await cloudinaryConfig.uploads(files[0].path);
-  // const user = await User.findOneAndUpdate({_id}, {
-  //   profile_url: result.url,
-  // });
-  return { message: "Image uploaded", result };
+exports.getPosts = async function (body) {
+    const { _id } = body;
+    const user = await User.findById(_id);
+    if (!user) {
+        throw new Error("User not found");
+    }
+    const result = await Posts.find({ user });
+    if (!result || result.length === 0) {
+        throw new Error("Posts not found");
+    }
+    return { message: "Post found", result };
+};
+
+exports.getAllPosts = async function (body) {
+    const result = await Posts.find();
+    if (!result) {
+        throw new Error("Posts not found");
+    }
+    return { message: "Posts found", result };
 };
 
 exports.createPosts = async function (body) {
-  const { ...posts } = body;
-  if(posts.content === null || posts.content === undefined) {
-    throw new Error("Please specify message");
-  }
-  if(posts.user_id === null || posts.user_id === undefined) {
-    throw new Error("Please specify user_id");
-  }
-  console.log({...posts});
-  const result = await Posts.create({
-    ...posts,
-  });
-  await result.save();
-  return { message: "Post created", result };
-}
+	const { ...posts } = body;
+	if (posts.content === null || posts.content === undefined) {
+		throw new Error("Please specify message");
+	}
+	if (posts.user_id === null || posts.user_id === undefined) {
+		throw new Error("Please specify user_id");
+	}
+	const user = await User.findById(posts.user_id);
+    if (!user) {
+      throw new Error("User not found");
+    }
+	const result = await Posts.create({
+		...posts,
+        user,
+	});
+	await result.save();
+	return { message: "Post created", result };
+};
 
-exports.getPosts = async function (body) {
-  const { _id } = body;
-  const user = await User.findById(_id);
-  if (!user) {
-    throw new Error("User not found");
-  }
-  const result = await Posts.find({user_id: _id});
-  if (!result) {
-    throw new Error("Posts not found");
-  }
-  return { message: "Post found", result };
-}
 
-exports.getAllPosts = async function (body) {
-  const result = await Posts.find();
-  if (!result) {
-    throw new Error("Posts not found");
-  }
-  return { message: "Posts found", result };
-}
+exports.addComments = async function (body) {
+    const { _id, user_id, content } = body;
+    if (!user_id) {
+        throw new Error("Please specify user_id");
+    }
+    if (!content) {
+        throw new Error("Please specify comment");
+    }
+    const user = await User.findById(user_id);
+    if (!user) {
+        throw new Error("User not found");
+    }
+    const result = await Posts.findByIdAndUpdate(
+        _id,
+        {
+            $push: {
+                comments: {
+                    user,
+                    content,
+                },
+            },
+            $inc: {
+                impressions: 1,
+            },
+        },
+        { new: true }
+    );
+    if (!result || result.length === 0) {
+        throw new Error("Posts not found");
+    }
+    return { message: "Comment added", result };
+};
 
-exports.updatePosts = async function (body) {
-  const { _id, ...posts } = body;
-  const result = await Posts.findByIdAndUpdate(_id, {
-    ...posts,
-  }, {new: true});
-  if (!result) {
-    throw new Error("Posts not found");
-  }
-  return { message: "Post updated", result };
-}
+exports.addLikes = async function (body) {
+    const { _id } = body;
+    const result = await Posts.findByIdAndUpdate(
+        _id,
+        {
+            $inc: {
+                impressions: 1,
+                numberOfLikes: 1,
+            },
+        },
+        { new: true }
+    );
+    if (!result || result.length === 0) {
+        throw new Error("Posts not found");
+    }
+    return { message: "Likes added", result };
+};
+
+exports.addRetweets = async function (body) {
+    const { _id } = body;
+    const result = await Posts.findByIdAndUpdate(
+        _id,
+        {
+            $inc: {
+                impressions: 1,
+                numberOfRetweets: 1,
+            },
+        },
+        { new: true }
+    );
+    if (!result || result.length === 0) {
+        throw new Error("Posts not found");
+    }
+    return { message: "Retweets added", result };
+};
 
 exports.deletePosts = async function (body) {
-  const { _id } = body;
-  const result = await Posts.findByIdAndDelete(_id);
-  if (!result) {
-    throw new Error("Posts not found");
-  }
-  return { message: "Post deleted", result };
-}
+	const { _id } = body;
+	const result = await Posts.findByIdAndDelete(_id);
+	if (!result || result.length === 0) {
+		throw new Error("Posts not found");
+	}
+	return { message: "Post deleted", result };
+};

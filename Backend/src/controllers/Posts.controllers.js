@@ -1,15 +1,5 @@
 const postsServices = require('../services/Posts.services');
 
-exports.uploadImage = async function (req, res) {
-    try {
-      const result = await postsServices.uploadImage(req.files, req.body);
-      res.status(200).json(result);
-    } catch (err) {
-      console.log(err);
-      res.status(400).json({ message: err.message, result: null });
-    }
-}
-
 exports.createPosts = async function (req, res) {
     try {
       const result = await postsServices.createPosts(req.body);
@@ -40,9 +30,29 @@ exports.getAllPosts = async function (req, res) {
     }
 }
 
-exports.updatePosts = async function (req, res) {
+exports.addComments = async function (req, res) {
     try {
-      const result = await postsServices.updatePosts(req.body);
+      const result = await postsServices.addComments(req.body);
+      res.status(200).json(result);
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ message: err.message, result: null });
+    }
+}
+
+exports.addLikes = async function (req, res) {
+    try {
+      const result = await postsServices.addLikes(req.body);
+      res.status(200).json(result);
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ message: err.message, result: null });
+    }
+}
+
+exports.addRetweets = async function (req, res) {
+    try {
+      const result = await postsServices.addRetweets(req.body);
       res.status(200).json(result);
     } catch (err) {
       console.log(err);

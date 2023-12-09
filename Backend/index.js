@@ -5,6 +5,7 @@ const db = require("./src/config/db");
 const cd = require("./src/config/cloudinary.config");
 const authRoutes = require("./src/routes/Auth.routes");
 const postsRoutes = require("./src/routes/Posts.routes");
+const userRoutes = require("./src/routes/User.routes");
 
 const app = express();
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(
 // Routes used in the app
 app.use("/auth", authRoutes);
 app.use( "/posts", postsRoutes);
+app.use("/user", userRoutes);
 
 app.listen(5050, () => {
   console.log("Server is running on port 5050");
