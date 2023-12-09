@@ -19,7 +19,7 @@ exports.uploadImage = async function (file, body) {
 		{
 			image: result.url,
 		},
-        {new: true}
+		{ new: true }
 	);
 	if (!user) {
 		throw new Error("User not found");
