@@ -2,12 +2,15 @@ const { User } = require("../models/User.models");
 const cloudinaryConfig = require("../config/cloudinary.config");
 const fs = require("fs");
 
-exports.uploadImage = async function (files, body) {
+exports.uploadImage = async function (file, body) {
 	const { _id } = body;
 	if (!_id) {
 		throw new Error("Please specify _id");
 	}
-	const result = await cloudinaryConfig.uploads(files[0].path);
+	if (!file) {
+		throw new Error("Please specify image");
+	}
+	const result = await cloudinaryConfig.uploads(file.path);
 	if (!result) {
 		throw new Error("Image failed to be uploaded");
 	}
@@ -17,16 +20,11 @@ exports.uploadImage = async function (files, body) {
 			image: result.url,
 		}
 	);
-	files.forEach((file) => {
-		// Construct the file path
-		const filePath = "uploads/" + file.filename;
-
-		// Delete the file
-		fs.unlink(filePath, (unlinkErr) => {
-			if (unlinkErr) {
-				throw new Error(unlinkErr);
-			}
-		});
+	fs.unlink(file.path, (error) => {
+		if (error) {
+			// Handle the error
+			throw new Error(error);
+		}
 	});
 	if (!user) {
 		throw new Error("User not found");

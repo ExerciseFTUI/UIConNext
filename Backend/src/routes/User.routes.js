@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 
 const userControllers = require('../controllers/User.controllers');
-const multerMiddlewares = require('../middlewares/Multer.middlewares');
+const upload = multer({ dest: 'tmp/' });
 
-router.post('/uploadImage', multerMiddlewares.uploadFiles, userControllers.uploadImage);
+router.post('/uploadImage', upload.single('file'), userControllers.uploadImage);
 
 module.exports = router;
