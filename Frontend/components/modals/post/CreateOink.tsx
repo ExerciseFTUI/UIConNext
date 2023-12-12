@@ -1,4 +1,4 @@
-import { View, Text, Modal, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, Text, Modal, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
 import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
 import { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
@@ -6,8 +6,7 @@ import * as ImagePicker from "expo-image-picker";
 
 const CreateOink = ({mode}) => {
   const [oinkMessages, onChangeOinkMessages] = useState('');
-  const [image, setImage] = useState();
-  const [camera, setCamera] = useState("")
+  const [image, setImage] = useState([]);
 
   const uploadImage = async (camera: string) => {
     try {
@@ -19,7 +18,7 @@ const CreateOink = ({mode}) => {
         result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
-          // aspect: [4, 3],
+          allowsMultipleSelection: true,
           quality: 1,
         })
         
@@ -29,17 +28,29 @@ const CreateOink = ({mode}) => {
         result = await ImagePicker.launchCameraAsync({
           cameraType: ImagePicker.CameraType.front,
           allowsEditing: true,
+          allowsMultipleSelection: true,
           quality: 1
         });
       }
 
       if (!result.canceled){
-        await saveImage(result.assets[0].uri);
+        const newImage = result.assets.map((asset) => asset.uri);
+        setImage([...image, ...newImage]);
       }
       
     } catch (error) {
       alert("Error uploading image : " + error.message);
     }
+  }
+
+  const renderImages = () => {
+  return image.map((uri, index) => (
+    <Image
+      key={index}
+      source={{ uri: uri }}
+      style={{ width: 80, height: 80, marginRight: 8, marginBottom: 8, borderRadius: 8 }}
+    />
+  ));
   }
 
   const saveImage = async (image) => {
@@ -49,8 +60,6 @@ const CreateOink = ({mode}) => {
       throw error;
     }
   }
-
-  
 
   return (
     <>
@@ -70,15 +79,32 @@ const CreateOink = ({mode}) => {
           {/* End of Header */}
 
           {/* Body input */}
-          <View className=" w-full h-80 px-6 py-2">
-            <TextInput
-              onChangeText={onChangeOinkMessages}
-              value={oinkMessages}
-              placeholder="Create an oink in here . . ."
-              keyboardType="default"
-              multiline={true}
-              className=" text-base text-slate-900 w-full "
-              />
+          <View className=" relative w-full h-80  my-3 ">
+            <View className=" border-2 border-gray-200  rounded-2xl px-3 py-3 mx-3 w-fit h-52 mb-24 ">
+              <TextInput
+                onChangeText={onChangeOinkMessages}
+                value={oinkMessages}
+                placeholder="Create an oink in here . . ."
+                keyboardType="default"
+                multiline={true}
+                className=" text-base text-slate-900 "
+                />
+            </View>
+
+              {/* Display selected image */}
+              {image && (
+                <ScrollView horizontal={true}  className=" px-6 absolute flex flex-row overflow-hidden bottom-0  h-fit ">
+                  {image.map((uri, index) => (
+                  <Image
+                    key={index}
+                    source={{ uri: uri }}
+                    className="w-24 h-24 border-black rounded-lg mr-1"
+                  />
+                ))}
+                </ScrollView>
+              )}
+              {/* End of Display selected image */}
+
           </View>
           {/* End of Body input */}
 
@@ -99,6 +125,12 @@ const CreateOink = ({mode}) => {
           {/* End of Footer */}
         </View>
       </TouchableWithoutFeedback>
+
+      {/* Button for clear all messages and images */}
+      <TouchableOpacity onPress={()=> {onChangeOinkMessages(""), setImage([])}} className=" bg-red-300  mt-10 py-4 w-1/3 rounded-2xl flex flex-row justify-center">
+        <Text className=" text-xl font-bold text-white">Clear All</Text>
+      </TouchableOpacity>
+      {/* End of Button for clear all messages and images */}
     </>
   )
 }
