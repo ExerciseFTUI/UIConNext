@@ -8,7 +8,7 @@ const CreateOink = () => {
     <>
         <View className=" rounded-2xl w-5/6 min-h-[30vh] bg-white absolute items-center top-32">
           {/* Header */}
-          <View className=" flex flex-row rounded-t-2xl bg-yellow-100 w-full px-6 justify-between py-3 items-center">
+          <View className=" flex flex-row rounded-t-2xl bg-yellow-100 w-full px-6 justify-between py-3 items-center ">
             <View className=" flex flex-row items-center">
               <Image source={require("../../../assets/Avatar2.webp")} className="w-8 h-8 border border-white rounded-full mr-1"></Image>
               <View>
