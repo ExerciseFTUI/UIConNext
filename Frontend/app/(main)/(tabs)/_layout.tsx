@@ -87,7 +87,6 @@ export default function TabLayout() {
       <Tabs.Screen
         name="addPost/index"
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused }) => {
             return (
               <View

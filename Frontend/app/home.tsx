@@ -64,12 +64,12 @@ export default function App() {
             {/* End of Button create Oink */}
 
             {/* Choice View */}
-            {createTriggered && 
+            {/* {createTriggered && 
             <CreateOink/>
             // <View className="w-20 h-20 bg-yellow-300 absolute bottom-0" >
 
             // </View>
-            }
+            } */}
             {/* End Choice View */}
 
         </SafeAreaView>

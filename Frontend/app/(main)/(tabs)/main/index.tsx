@@ -14,14 +14,6 @@ export default function Main() {
         showsVerticalScrollIndicator={false}
       />
 
-      <Link href="/new-tweet" asChild>
-        <Entypo
-          name="plus"
-          size={24}
-          color="white"
-          style={styles.floatingButton}
-        />
-      </Link>
     </View>
   );
 }

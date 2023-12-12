@@ -1,12 +1,16 @@
-import { View, Text, Modal, Image, TextInput } from "react-native";
-import { AntDesign, FontAwesome5, Entypo } from "@expo/vector-icons";
+import { View, Text, Modal, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
 import { useState } from "react";
 
-const CreateOink = () => {
+const CreateOink = ({mode}) => {
   const [oinkMessages, onChangeOinkMessages] = useState('');
+  // console.log(mode);
+  
+
   return (
     <>
-        <View className=" rounded-2xl w-5/6 min-h-[30vh] bg-white absolute items-center top-32">
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View className=" rounded-2xl w-full h-fit bg-white items-center top-3">
           {/* Header */}
           <View className=" flex flex-row rounded-t-2xl bg-yellow-100 w-full px-6 justify-between py-3 items-center ">
             <View className=" flex flex-row items-center">
@@ -16,28 +20,40 @@ const CreateOink = () => {
                 <Text className=" text-xs">Engineering</Text>
               </View>
             </View>
-            <Text>Oink!</Text>
+            <Text className=" text-base font-semibold">{mode}</Text>
           </View>
           {/* End of Header */}
 
           {/* Body input */}
-          <View className=" w-full h-fit px-6 py-2">
+          <View className=" w-full h-80 px-6 py-2">
             <TextInput
               onChangeText={onChangeOinkMessages}
               value={oinkMessages}
               placeholder="Create an oink in here . . ."
               keyboardType="default"
-              className=" text-base text-black"
-            />
+              multiline={true}
+              className=" text-base text-slate-900 w-full "
+              />
           </View>
           {/* End of Body input */}
 
           {/* Footer */}
-          <View className=" bg-yellow-100 rounded-b-2xl w-full h-12 bottom-0">
-
+          <View className="  bg-yellow-100 rounded-b-2xl w-full h-12 justify-between items-center flex flex-row px-6">
+            <View className=" flex flex-row">
+              <TouchableOpacity>
+                <Entypo name="images" size={30} color="#3A4D39" />
+              </TouchableOpacity>
+              <TouchableOpacity className=" ml-3">
+                <Entypo name="camera" size={30} color="#3A4D39" />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity>
+              <FontAwesome name="send" size={30} color="#3A4D39" />
+            </TouchableOpacity>
           </View>
           {/* End of Footer */}
         </View>
+      </TouchableWithoutFeedback>
     </>
   )
 }
