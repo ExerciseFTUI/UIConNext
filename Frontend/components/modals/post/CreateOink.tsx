@@ -1,10 +1,55 @@
 import { View, Text, Modal, Image, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
 import { useState } from "react";
+import * as ImagePicker from "expo-image-picker";
+
 
 const CreateOink = ({mode}) => {
   const [oinkMessages, onChangeOinkMessages] = useState('');
-  // console.log(mode);
+  const [image, setImage] = useState();
+  const [camera, setCamera] = useState("")
+
+  const uploadImage = async (camera: string) => {
+    try {
+      let result;
+
+      if (camera === "gallery") {
+        await ImagePicker.requestCameraPermissionsAsync();
+
+        result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          // aspect: [4, 3],
+          quality: 1,
+        })
+        
+      } else{
+        await ImagePicker.requestCameraPermissionsAsync();
+  
+        result = await ImagePicker.launchCameraAsync({
+          cameraType: ImagePicker.CameraType.front,
+          allowsEditing: true,
+          quality: 1
+        });
+      }
+
+      if (!result.canceled){
+        await saveImage(result.assets[0].uri);
+      }
+      
+    } catch (error) {
+      alert("Error uploading image : " + error.message);
+    }
+  }
+
+  const saveImage = async (image) => {
+    try {
+      setImage(image);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   
 
   return (
@@ -40,10 +85,10 @@ const CreateOink = ({mode}) => {
           {/* Footer */}
           <View className="  bg-yellow-100 rounded-b-2xl w-full h-12 justify-between items-center flex flex-row px-6">
             <View className=" flex flex-row">
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => uploadImage("gallery")} >
                 <Entypo name="images" size={30} color="#3A4D39" />
               </TouchableOpacity>
-              <TouchableOpacity className=" ml-3">
+              <TouchableOpacity className=" ml-3"  onPress={() => uploadImage("")}>
                 <Entypo name="camera" size={30} color="#3A4D39" />
               </TouchableOpacity>
             </View>
