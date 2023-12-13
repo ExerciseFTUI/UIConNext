@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 
 const postsControllers = require('../controllers/Posts.controllers');
+const upload = multer({ storage: multer.memoryStorage() });
 
-router.post('/createPosts', postsControllers.createPosts);
+router.post('/createPosts', upload.single('file'), postsControllers.createPosts);
 router.post('/getPosts', postsControllers.getPosts);
 router.post('/getAllPosts', postsControllers.getAllPosts);
 router.put('/addComments', postsControllers.addComments);

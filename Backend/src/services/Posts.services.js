@@ -1,5 +1,6 @@
 const { Posts } = require("../models/Posts.models");
 const { User } = require("../models/User.models");
+const cloudinaryConfig = require("../config/cloudinary.config");
 
 exports.getPosts = async function (body) {
     const { _id } = body;
@@ -22,13 +23,17 @@ exports.getAllPosts = async function (body) {
     return { message: "Posts found", result };
 };
 
-exports.createPosts = async function (body) {
+exports.createPosts = async function (file, body) {
 	const { ...posts } = body;
 	if (posts.content === null || posts.content === undefined) {
 		throw new Error("Please specify message");
 	}
 	if (posts.user_id === null || posts.user_id === undefined) {
 		throw new Error("Please specify user_id");
+	}
+    const upload = file ? await cloudinaryConfig.uploads(file.buffer): "empty";
+	if (!upload) {
+		throw new Error("Image failed to be uploaded");
 	}
 	const user = await User.findById(posts.user_id);
     if (!user) {
@@ -37,6 +42,7 @@ exports.createPosts = async function (body) {
 	const result = await Posts.create({
 		...posts,
         user,
+        image: upload === "empty" ? null: upload.url,
 	});
 	await result.save();
 	return { message: "Post created", result };

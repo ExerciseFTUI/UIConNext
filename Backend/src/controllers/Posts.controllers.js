@@ -2,7 +2,7 @@ const postsServices = require('../services/Posts.services');
 
 exports.createPosts = async function (req, res) {
     try {
-      const result = await postsServices.createPosts(req.body);
+      const result = await postsServices.createPosts(req.file, req.body);
       res.status(200).json(result);
     } catch (err) {
       res.status(400).json({ message: err.message, result: null });

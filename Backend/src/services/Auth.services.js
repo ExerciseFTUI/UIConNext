@@ -40,8 +40,8 @@ exports.getUser = async function (body) {
 
 exports.register = async function (body) {
 	const { ...user } = body;
-	if (!user.name || !user.username || !user.email) {
-		throw new Error("Please fill all the fields: name, username, email");
+	if (!user.clerk_id || !user.name || !user.username || !user.email) {
+		throw new Error("Please fill all the fields: clerk_id, name, username, email");
 	}
 	const unique_username = await User.findOne({ username: user.username });
 	if (unique_username) {
