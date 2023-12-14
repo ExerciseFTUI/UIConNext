@@ -41,7 +41,7 @@ export default function useTweet() {
       //   "https://jsonplaceholder.typicode.com/users"
       // );
       // const result = response.data;
-
+      console.log(`${api}/test`);
       try {
         const response = await axios.get(`${api}/test`);
         const result = response.data;

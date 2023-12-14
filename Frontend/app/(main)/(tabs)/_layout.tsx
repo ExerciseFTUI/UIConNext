@@ -55,7 +55,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="main/index"
+        name="main"
         options={{
           tabBarIcon: ({ focused }) => {
             return (

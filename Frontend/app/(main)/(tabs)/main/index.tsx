@@ -20,6 +20,7 @@ export default function Main() {
     error: tweetError,
     isPending: isTweetPending,
   } = useTweet();
+
   const { mutate, isSuccess, isError, isPending, error } = useAddTweet();
 
   // if (isPending) {
@@ -55,6 +56,14 @@ export default function Main() {
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           <ActivityIndicator size="large" color={COLORS.primary} />
+        </View>
+      )}
+
+      {isTweetError && (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text style={{ fontSize: SIZES.xLarge }}>Something Went Wrong</Text>
         </View>
       )}
 
