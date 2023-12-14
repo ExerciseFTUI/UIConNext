@@ -1,14 +1,6 @@
 import { StyleSheet, View, FlatList, Pressable, Text, Image } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { Link } from "expo-router";
 import tweets from "../../../../constants/tweets";
-import tweetOnce from "../../../../constants/tweetOnce";
 import Post from "../../../../components/Post";
-import ReplyPost from "../../../../components/ReplyPost";
-import PostPress from "../../../../components/PostPress";
-import { useState } from "react";
-import IconButton from "../../../../components/IconButton";
-import { blue300 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 export default function Main() {
   return (
