@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Pressable, Text, Image } from "react-native";
+import { StyleSheet, View, FlatList, Pressable, Text, Image, BackHandler, Alert } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import tweets from "../../../constants/tweets";
@@ -6,18 +6,33 @@ import tweetOnce from "../../../constants/tweetOnce";
 import Post from "../../../components/Post";
 import ReplyPost from "../../../components/ReplyPost";
 import PostPress from "../../../components/PostPress";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IconButton from "../../../components/IconButton";
 
 export default function Main() {
+    useEffect(() => {
+    const backAction = () => {
+      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+  
   return (
     <View style={css.page}>
-      {/* <FlatList
-        data={tweets}
-        renderItem={({ item }) => <Post tweet={item} />}
-        overScrollMode="never"
-        showsVerticalScrollIndicator={false}
-      /> */}
       <Pressable style={css.container} className=" border border-black">
         <Image source={{ uri: tweetOnce.user.image }} style={css.userImage} />
 
