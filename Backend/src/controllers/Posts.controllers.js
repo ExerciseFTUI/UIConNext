@@ -29,7 +29,7 @@ exports.getAllPosts = async function (req, res) {
 
 exports.addComments = async function (req, res) {
     try {
-      const result = await postsServices.addComments(req.body);
+      const result = await postsServices.addComments(req.file, req.body);
       res.status(200).json(result);
     } catch (err) {
       res.status(400).json({ message: err.message, result: null });
