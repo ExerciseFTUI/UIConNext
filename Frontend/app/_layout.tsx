@@ -2,6 +2,7 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { Slot, usePathname, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import * as SecureStore from "expo-secure-store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -53,13 +54,17 @@ const tokenCache = {
   },
 };
 
+const queryClient = new QueryClient();
+
 const RootLayout = () => {
   return (
     <ClerkProvider
       publishableKey={CLERK_PUBLISHABLE_KEY}
       tokenCache={tokenCache}
     >
-      <InitialLayout />
+      <QueryClientProvider client={queryClient}>
+        <InitialLayout />
+      </QueryClientProvider>
     </ClerkProvider>
   );
 };

@@ -3,10 +3,47 @@ import { Entypo } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import tweets from "../../../../constants/tweets";
 import Post from "../../../../components/Post";
+import useTweet from "../../../../hooks/useTweet";
+import useAddTweet from "../../../../hooks/useAddTweet";
+import { TouchableOpacity, Text } from "react-native";
+import { uri } from "../../../../constants/api";
 
 export default function Main() {
+  const {
+    data: posts,
+    refetch: refreshUsers,
+    isSuccess: isTweetSuccess,
+    isError: isTweetError,
+    error: tweetError,
+  } = useTweet();
+  const { mutate, isSuccess, isError, isPending, error } = useAddTweet();
+
+  // if (isPending) {
+  //   console.log("pending...");
+  // }
+
+  // if (isSuccess) {
+  //   console.log("success");
+  //   console.log(uri);
+  // }
+
+  if (isTweetSuccess) {
+    console.log(posts);
+  }
+
+  if (isTweetError) {
+    console.log(tweetError);
+  }
+
+  // if (isError) {
+  //   console.log(error.message);
+  // }
+
   return (
     <View style={styles.page}>
+      <TouchableOpacity onPress={() => mutate("Hello")}>
+        <Text>Mutate</Text>
+      </TouchableOpacity>
       <FlatList
         data={tweets}
         renderItem={({ item }) => <Post tweet={item} />}
