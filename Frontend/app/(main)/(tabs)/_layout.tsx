@@ -72,14 +72,6 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="main/tweet/index"
-        // component={TweetScreen}
-        options={{
-          
-        }}
-      />
-
-      <Tabs.Screen
         name="assistant/index"
         options={{
           tabBarIcon: ({ focused }) => {

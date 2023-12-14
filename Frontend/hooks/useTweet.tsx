@@ -43,8 +43,8 @@ export default function useTweet() {
       // const result = response.data;
       console.log(`${api}/test`);
       try {
-        const response = await axios.get(`${api}/test`);
-        const result = response.data;
+        const response = await axios.post(`${api}/post/getAllPosts`);
+        const result = response.data.result;
 
         return result as TweetType[] | undefined;
       } catch (error) {

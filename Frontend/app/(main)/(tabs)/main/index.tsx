@@ -69,13 +69,13 @@ export default function Main() {
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Text style={{ fontSize: SIZES.xLarge }}>Something Went Wrong</Text>
+          <Text style={{ fontSize: SIZES.medium }}>Something Went Wrong</Text>
         </View>
       )}
 
       {tweets && (
         <FlatList
-          data={tweets}
+          data={posts}
           renderItem={({ item }) => <Post tweet={item} />}
           overScrollMode="never"
           showsVerticalScrollIndicator={false}
