@@ -1,11 +1,17 @@
-import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import tweets from "../../../../constants/tweets";
 import Post from "../../../../components/Post";
 import useTweet from "../../../../hooks/useTweet";
 import useAddTweet from "../../../../hooks/useAddTweet";
-import { TouchableOpacity, Text } from "react-native";
 import { uri } from "../../../../constants/api";
 import COLORS from "../../../../constants/colors";
 import { SIZES } from "../../../../constants/sizes";
@@ -75,15 +81,6 @@ export default function Main() {
           showsVerticalScrollIndicator={false}
         />
       )}
-
-      <Link href="/new-tweet" asChild>
-        <Entypo
-          name="plus"
-          size={24}
-          color="white"
-          style={styles.floatingButton}
-        />
-      </Link>
     </View>
   );
 }

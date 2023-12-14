@@ -1,14 +1,17 @@
-import { View, Text, Image, StyleSheet, Pressable } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import { TweetType } from "../types";
 import { Entypo } from "@expo/vector-icons";
 import IconButton from "./IconButton";
 import { Link } from "expo-router";
+import { useState } from "react";
 
 type TweetProps = {
   tweet: TweetType;
 };
 
 const Post = ({ tweet }: TweetProps) => {
+  const [settingButton, setSettingButton] = useState(false);
+
   return (
     <Link href={`/main/${tweet.id}`} asChild>
       <Pressable style={styles.container}>
@@ -23,7 +26,20 @@ const Post = ({ tweet }: TweetProps) => {
               size={16}
               color="gray"
               style={{ marginLeft: "auto" }}
+              onPress={() => setSettingButton((prev) => prev = !prev)}
             />
+            {/* Button setting */}
+            {settingButton && (
+              <View style={styles.settingContainer}>
+                <TouchableOpacity style={styles.settingOption}>
+                  <Text style={styles.settingText}>Copy Link</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.settingOption, { backgroundColor: "red" }]}>
+                  <Text style={styles.settingText}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            {/* End of Button setting */}
           </View>
 
           <Text style={styles.content}>{tweet.content}</Text>
@@ -44,6 +60,7 @@ const Post = ({ tweet }: TweetProps) => {
     </Link>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -85,6 +102,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 5,
     justifyContent: "space-between",
+  },
+  settingContainer: {
+    backgroundColor: "black",
+    borderRadius: 10,
+    position: "absolute",
+    right: 10,
+    top: 10,
+    zIndex: 1,
+  },
+  settingOption: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  settingText: {
+    color: "white",
   },
 });
 
