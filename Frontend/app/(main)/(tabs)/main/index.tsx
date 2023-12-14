@@ -1,9 +1,8 @@
-import { StyleSheet, View, FlatList, Pressable, Text, Image } from "react-native";
+import { StyleSheet, View, FlatList, Pressable, Text, Image, ActivityIndicator } from "react-native";
 import tweets from "../../../../constants/tweets";
 import Post from "../../../../components/Post";
 import useTweet from "../../../../hooks/useTweet";
 import useAddTweet from "../../../../hooks/useAddTweet";
-import { TouchableOpacity, Text } from "react-native";
 import { uri } from "../../../../constants/api";
 import COLORS from "../../../../constants/colors";
 import { SIZES } from "../../../../constants/sizes";

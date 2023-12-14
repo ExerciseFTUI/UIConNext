@@ -13,7 +13,10 @@ const Post = ({ tweet }: TweetProps) => {
   const [settingButton, setSettingButton] = useState(false);
 
   return (
-    <Link href={`/main/${tweet.id}`} asChild>
+    <Link  href={{
+          pathname: `/main/${tweet.id}`,
+          params: { tweet },
+        }} asChild>
       <Pressable style={styles.container}>
         <Image source={{ uri: tweet.user.image }} style={styles.userImage} />
 
