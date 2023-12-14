@@ -42,6 +42,8 @@ export default function TabLayout() {
           bottom: 0,
           right: 0,
           left: 0,
+          // marginTop: 5,
+          paddingBottom: 10,
           elevation: 0,
           height: 55,
           backgroundColor: COLORS.white,
@@ -70,6 +72,14 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
+        name="main/tweet/index"
+        // component={TweetScreen}
+        options={{
+          
+        }}
+      />
+
+      <Tabs.Screen
         name="assistant/index"
         options={{
           tabBarIcon: ({ focused }) => {
@@ -87,7 +97,6 @@ export default function TabLayout() {
       <Tabs.Screen
         name="addPost/index"
         options={{
-          headerShown: false,
           tabBarIcon: ({ focused }) => {
             return (
               <View
@@ -97,7 +106,7 @@ export default function TabLayout() {
                   backgroundColor: COLORS.primary,
                   height: Platform.OS === "ios" ? 50 : 60,
                   width: Platform.OS === "ios" ? 50 : 60,
-                  top: Platform.OS === "ios" ? -10 : -20,
+                  top: Platform.OS === "ios" ? -20 : -30,
                   borderRadius: Platform.OS === "ios" ? 25 : 30,
                   borderWidth: 2,
                   borderColor: COLORS.white,

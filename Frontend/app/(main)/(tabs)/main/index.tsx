@@ -1,7 +1,5 @@
-import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { Link } from "expo-router";
-// import tweets from "../../../../constants/tweets";
+import { StyleSheet, View, FlatList, Pressable, Text, Image } from "react-native";
+import tweets from "../../../../constants/tweets";
 import Post from "../../../../components/Post";
 import useTweet from "../../../../hooks/useTweet";
 import useAddTweet from "../../../../hooks/useAddTweet";
@@ -76,14 +74,6 @@ export default function Main() {
         />
       )}
 
-      <Link href="/new-tweet" asChild>
-        <Entypo
-          name="plus"
-          size={24}
-          color="white"
-          style={styles.floatingButton}
-        />
-      </Link>
     </View>
   );
 }
