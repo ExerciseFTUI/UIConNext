@@ -1,6 +1,9 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Button, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import CreateOink from "../../../../components/modals/post/CreateOink";
+import ReplyPost from "../../../../components/ReplyPost";
+import tweets from "../../../../constants/tweets";
+import Post from "../../../../components/Post";
 
 const AddPost = () => {
   const [mode, setMode] = useState("Oink");
@@ -25,6 +28,15 @@ const AddPost = () => {
         </View>
         {/* End of Button for choose mode post */}
         <CreateOink mode={mode}/>
+
+      {/* <View className=" flex bg-white w-full">
+        <FlatList
+          data={tweets}
+          renderItem={({ item }) => <ReplyPost tweet={item} />}
+          overScrollMode="never"
+          showsVerticalScrollIndicator={false}
+          />
+        </View> */}
       </View>
     </>
   );
