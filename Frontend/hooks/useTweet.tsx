@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { TweetType } from "../types";
-import { uri } from "../constants/api";
+import { api, uri } from "../constants/api";
 
 type User = {
   id: number;
@@ -42,14 +42,11 @@ export default function useTweet() {
       // );
       // const result = response.data;
 
-      console.log(uri);
-
       try {
-        const response = await axios.get(`${uri}/test`);
-        console.log(response);
+        const response = await axios.get(`${api}/test`);
         const result = response.data;
 
-        return result as TweetType | undefined;
+        return result as TweetType[] | undefined;
       } catch (error) {
         console.log(error);
       }
