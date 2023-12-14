@@ -34,10 +34,10 @@ export default function DrawerLayout() {
         name="(tabs)"
         options={{ headerShown: false, title: "Home" }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="home"
         options={{ headerShown: false, title: "Home" }}
-      />
+      /> */}
     </Drawer>
   );
 }

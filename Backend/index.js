@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const db = require("./src/config/db");
 const authRoutes = require("./src/routes/Auth.routes");
+const postRoutes = require("./src/routes/Posts.routes");
 
 const app = express();
 dotenv.config();
@@ -20,6 +21,8 @@ app.use(
 
 // Routes used in the app
 app.use("/auth", authRoutes);
+app.use("/post", postRoutes);
+
 const tweets = [
   {
     id: "t0",
@@ -37,6 +40,7 @@ const tweets = [
     numberOfComments: 123,
     numberOfRetweets: 11,
     numberOfLikes: 10,
+    category: "found",
   },
   {
     id: "111111111",
@@ -50,6 +54,7 @@ const tweets = [
     },
     content:
       "Just had a great workout at the gym! 💪 #fitness #healthylifestyle",
+    category: "lost",
   },
   {
     id: "222222222",
@@ -67,6 +72,7 @@ const tweets = [
     numberOfRetweets: 20,
     numberOfLikes: 100,
     impressions: 1000,
+    category: "parking",
   },
   {
     id: "333333333",
@@ -84,6 +90,7 @@ const tweets = [
     numberOfRetweets: 10,
     numberOfLikes: 50,
     impressions: 1000,
+    category: "tweet",
   },
   {
     id: "t1",
@@ -102,6 +109,7 @@ const tweets = [
     numberOfComments: 123,
     numberOfRetweets: 11,
     numberOfLikes: 10,
+    category: "parking",
   },
   {
     id: "t2",
@@ -118,6 +126,7 @@ const tweets = [
     numberOfComments: 4,
     numberOfRetweets: 11,
     numberOfLikes: 99,
+    category: "found",
   },
   {
     id: "t3",
@@ -133,6 +142,7 @@ const tweets = [
     numberOfComments: 4,
     numberOfRetweets: 11,
     numberOfLikes: 99,
+    category: "lost",
   },
   {
     id: "t4",
@@ -149,6 +159,7 @@ const tweets = [
     numberOfComments: 4,
     numberOfRetweets: 11,
     numberOfLikes: 99,
+    category: "tweet",
   },
 ];
 
