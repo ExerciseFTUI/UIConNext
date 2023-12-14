@@ -10,18 +10,15 @@ import {
   Image,
   Button,
 } from "react-native";
-import { AntDesign, FontAwesome5, Entypo, Ionicons } from "@expo/vector-icons";
+import { AntDesign, FontAwesome5, Entypo } from "@expo/vector-icons";
 import Tweet from "../../components/Tweet";
 import Profile from "../../components/modals/Profile";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useAuth } from "@clerk/clerk-expo";
-import CreateOink from "../../components/modals/CreateOink";
 
 export default function App() {
   const [isTriggered, setIsTriggered] = useState(false);
-  const [createTriggered, setCreateTriggered] = useState(false);
-  const [selectPost, setSelectPost] = useState("null");
 
   const { signOut } = useAuth();
   const doLogout = () => {
@@ -55,23 +52,24 @@ export default function App() {
             Click Here
           </Text>
         </TouchableOpacity> */}
-        <ScrollView className="mt-2">
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
-          <Tweet></Tweet>
+          <ScrollView className="mt-2">
+            <Tweet></Tweet>
+            <Tweet></Tweet>
+            <Tweet></Tweet>
+            <Tweet></Tweet>
+            <Tweet></Tweet>
+            <Tweet></Tweet>
+            <Tweet></Tweet>
+            <Tweet></Tweet>
+            <Tweet></Tweet>
 
             {/* Modal User */}
             <Profile status={isTriggered} setStatus={setIsTriggered} />
             {/* End of Modal User */}
 
-          <StatusBar style="auto" />
-        </ScrollView>
+            <StatusBar style="auto" />
+          </ScrollView>
+        </View>
       </SafeAreaView>
     </>
   );
