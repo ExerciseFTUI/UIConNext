@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { Link } from "expo-router";
-// import tweets from "../../../../constants/tweets";
+import tweets from "../../../../constants/tweets";
 import Post from "../../../../components/Post";
 import useTweet from "../../../../hooks/useTweet";
 import useAddTweet from "../../../../hooks/useAddTweet";
@@ -13,7 +13,7 @@ import Welcome from "../../../../components/main/Welcome";
 
 export default function Main() {
   const {
-    data: tweets,
+    data: posts,
     refetch: refreshUsers,
     isSuccess: isTweetSuccess,
     isError: isTweetError,
