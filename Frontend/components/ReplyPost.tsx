@@ -4,13 +4,13 @@ import { Entypo } from "@expo/vector-icons";
 import IconButton from "./IconButton";
 import { Link } from "expo-router";
 
-type TweetProps = {
-  tweet: TweetType;
-};
+// type TweetProps = {
+//   tweet: TweetType;
+// };
 
-const ReplyPost = ({ tweet }: TweetProps) => {
+const ReplyPost = ( tweet: any) => {
   return (
-    <Link href={`/feed/${tweet.id}`} asChild>
+    <Link href={`/feed/${tweet._id}`} asChild>
       <Pressable className="pl-3 border-b-2 py-2 border-gray-400">
         <View style={styles.container} className="border-l-2  border-gray-600 ">
           <Image source={{ uri: tweet.user.image }} style={styles.userImage} />
