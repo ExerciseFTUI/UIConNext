@@ -4,7 +4,7 @@ import {
   DrawerItemList,
   createDrawerNavigator,
 } from "@react-navigation/drawer";
-import { Dimensions, Text } from "react-native";
+import { Dimensions, Platform, Text } from "react-native";
 import { CustomDrawerContent } from "../../components/CustomDrawerContent";
 import { useEffect } from "react";
 import { useUser } from "@clerk/clerk-expo";
@@ -47,6 +47,9 @@ export default function DrawerLayout() {
       //     width: width - width / 3,
       //   },
       // }}
+      screenOptions={{
+        swipeEdgeWidth: Platform.OS === "ios" ? 0 : 10
+      }}
       drawerContent={(props) => <CustomDrawerContent />}
     >
       <Drawer.Screen

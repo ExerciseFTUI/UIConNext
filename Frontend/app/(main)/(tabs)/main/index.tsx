@@ -1,13 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  ActivityIndicator,
-  TouchableOpacity,
-  Text,
-} from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { StyleSheet, View, FlatList, Pressable, Text, Image, ActivityIndicator } from "react-native";
 import tweets from "../../../../constants/tweets";
 import Post from "../../../../components/Post";
 import useTweet from "../../../../hooks/useTweet";
