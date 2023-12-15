@@ -35,20 +35,16 @@ exports.createPosts = async function (file, body) {
   if (!upload) {
     throw new Error("Image failed to be uploaded");
   }
-  const user = await User.findById(posts.user_id); //Ganti menjadi find by clerk_id
-  const user2 = await User.findOne({ clerk_id: posts.user_id });
-
-  console.log(user2);
-
+  const user = await User.findById(posts.user_id);
   if (!user) {
     throw new Error("User not found");
   }
-  //   const result = await Posts.create({
-  //     ...posts,
-  //     user,
-  //     image: upload === "empty" ? null : upload.url,
-  //   });
-  //   await result.save();
+  const result = await Posts.create({
+    ...posts,
+    user,
+    image: upload === "empty" ? null : upload.url,
+  });
+  await result.save();
   return { message: "Post created", result };
 };
 
@@ -92,39 +88,6 @@ exports.addComments = async function (file, body) {
   }
   return { message: "Comment added", result };
 };
-
-// exports.addComments = async function (body) {
-//     const { _id, user_id, content } = body;
-//     if (!user_id) {
-//         throw new Error("Please specify user_id");
-//     }
-//     if (!content) {
-//         throw new Error("Please specify content");
-//     }
-//     const user = await User.findById(user_id);
-//     if (!user) {
-//         throw new Error("User not found");
-//     }
-//     const result = await Posts.findByIdAndUpdate(
-//         _id,
-//         {
-//             $push: {
-//                 comments: {
-//                     user,
-//                     content,
-//                 },
-//             },
-//             $inc: {
-//                 impressions: 1,
-//             },
-//         },
-//         { new: true }
-//     );
-//     if (!result || result.length === 0) {
-//         throw new Error("Posts not found");
-//     }
-//     return { message: "Comment added", result };
-// };
 
 exports.addLikes = async function (body) {
   const { _id } = body;
@@ -170,3 +133,7 @@ exports.deletePosts = async function (body) {
   }
   return { message: "Post deleted", result };
 };
+
+// exports.filterCategory = async function (body) {
+//     const { category } = body;
+//     const
