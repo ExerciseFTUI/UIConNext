@@ -4,6 +4,7 @@ const cors = require("cors");
 const db = require("./src/config/db");
 const authRoutes = require("./src/routes/Auth.routes");
 const postRoutes = require("./src/routes/Posts.routes");
+const userRoutes = require("./src/routes/User.routes");
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(
 // Routes used in the app
 app.use("/auth", authRoutes);
 app.use("/post", postRoutes);
+app.use("/user", userRoutes)
 
 const tweets = [
   {
