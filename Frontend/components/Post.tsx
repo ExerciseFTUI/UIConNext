@@ -14,7 +14,7 @@ const Post = ({ tweet }: TweetProps) => {
 
   return (
     <Link  href={{
-          pathname: `/main/${tweet.id}`,
+          pathname: `/main/${tweet._id}`,
           params: { tweet },
         }} asChild>
       <Pressable style={styles.container}>
