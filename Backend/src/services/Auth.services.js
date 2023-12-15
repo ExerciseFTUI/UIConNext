@@ -30,12 +30,16 @@ const { User } = require("../models/User.models");
 // };
 
 exports.getUser = async function (body) {
-  const {} = body;
-  const result = await User.findById(clerk_id);
-  if (!result) {
-    return { message: "User not found", result: null };
-  }
-  return { message: "User found", result };
+ const { user } = body;
+ const result = await User.findById(user.clerk_id);
+ if (!result) {
+        const result = new User({
+            ...user,
+        });
+        await result.save();
+        return { message: "User created with clerk_id", result };
+ }
+ return { message: "User found", result };
 };
 
 exports.register = async function (body) {

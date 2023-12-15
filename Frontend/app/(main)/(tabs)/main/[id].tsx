@@ -9,6 +9,8 @@ import { useGlobalSearchParams } from "expo-router";
 
 export default function Main() {
   const { id } = useGlobalSearchParams();
+  console.log(id);
+  
   const tweetPress = tweets.find((t) => t.id === id);
 
   if (!tweetPress) console.log("Ga nemu bang");
