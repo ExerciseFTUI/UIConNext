@@ -1,4 +1,11 @@
-import { View, Text, Image, StyleSheet, Pressable, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import { TweetType } from "../types";
 import { Entypo } from "@expo/vector-icons";
 import IconButton from "./IconButton";
@@ -11,12 +18,18 @@ type TweetProps = {
 
 const Post = ({ tweet }: TweetProps) => {
   const [settingButton, setSettingButton] = useState(false);
+  console.log(tweet._id);
+
+  //get Tweet By iD
 
   return (
-    <Link  href={{
-          pathname: `/main/${tweet.id}`,
-          params: { tweet },
-        }} asChild>
+    <Link
+      href={{
+        pathname: `/main/${tweet._id}`,
+        params: { tweet },
+      }}
+      asChild
+    >
       <Pressable style={styles.container}>
         <Image source={{ uri: tweet.user.image }} style={styles.userImage} />
 
@@ -29,7 +42,7 @@ const Post = ({ tweet }: TweetProps) => {
               size={16}
               color="gray"
               style={{ marginLeft: "auto" }}
-              onPress={() => setSettingButton((prev) => prev = !prev)}
+              onPress={() => setSettingButton((prev) => (prev = !prev))}
             />
             {/* Button setting */}
             {settingButton && (
@@ -37,7 +50,9 @@ const Post = ({ tweet }: TweetProps) => {
                 <TouchableOpacity style={styles.settingOption}>
                   <Text style={styles.settingText}>Copy Link</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.settingOption, { backgroundColor: "red" }]}>
+                <TouchableOpacity
+                  style={[styles.settingOption, { backgroundColor: "red" }]}
+                >
                   <Text style={styles.settingText}>Delete</Text>
                 </TouchableOpacity>
               </View>
@@ -63,7 +78,6 @@ const Post = ({ tweet }: TweetProps) => {
     </Link>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {

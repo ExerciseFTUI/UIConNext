@@ -1,4 +1,13 @@
-import { StyleSheet, View, FlatList, Pressable, Text, Image, BackHandler, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Pressable,
+  Text,
+  Image,
+  BackHandler,
+  Alert,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import tweets from "../../../../constants/tweets";
 import tweetOnce from "../../../../constants/tweetOnce";
@@ -9,36 +18,37 @@ import { useGlobalSearchParams } from "expo-router";
 
 export default function Main() {
   const { id } = useGlobalSearchParams();
+  // console.log(id);
   const tweetPress = tweets.find((t) => t.id === id);
 
   if (!tweetPress) console.log("Ga nemu bang");
-  else console.log(tweetPress);
-  
-    useEffect(() => {
+  // else console.log(tweetPress);
+
+  useEffect(() => {
     const backAction = () => {
-      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+      Alert.alert("Hold on!", "Are you sure you want to go back?", [
         {
-          text: 'Cancel',
+          text: "Cancel",
           onPress: () => null,
-          style: 'cancel',
+          style: "cancel",
         },
-        {text: 'YES', onPress: () => BackHandler.exitApp()},
+        { text: "YES", onPress: () => BackHandler.exitApp() },
       ]);
       return true;
     };
 
     const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
+      "hardwareBackPress",
+      backAction
     );
 
     return () => backHandler.remove();
   }, []);
-  
+
   return (
     <View style={css.page}>
       {/* Original tweet */}
-      <View style={css.container} className=" border border-black">
+      {/* <View style={css.container} className=" border border-black">
         <Image source={{ uri: tweetPress.user.image }} style={css.userImage} />
 
         <View style={css.mainContainer}>
@@ -57,7 +67,7 @@ export default function Main() {
 
           {tweetPress.image && (
             <Image source={{ uri: tweetPress.image }} style={css.image} />
-            )}
+          )}
 
           <View style={css.footer}>
             <IconButton icon="comment" text={tweetPress.numberOfComments} />
@@ -67,18 +77,17 @@ export default function Main() {
             <IconButton icon="share-apple" />
           </View>
         </View>
-      </View>
+      </View> */}
       {/* Original tweet */}
 
       {/* Tweet replies */}
-      <FlatList
+      {/* <FlatList
         data={tweets}
         renderItem={({ item }) => <ReplyPost tweet={item} />}
         overScrollMode="never"
         showsVerticalScrollIndicator={false}
-        />
+      /> */}
       {/* End of Tweet replies */}
-
     </View>
   );
 }

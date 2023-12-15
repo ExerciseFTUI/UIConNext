@@ -27,17 +27,17 @@ export default function DrawerLayout() {
   useEffect(() => {
     //Register user if first time login
     registerUser();
-  }, []);
+  }, [user.id]);
 
   const registerUser = async () => {
     console.log(user.id);
     console.log(user.fullName);
     console.log(user.firstName);
-    console.log(user.emailAddresses[0]);
+    console.log(user.emailAddresses[0].emailAddress);
     console.log(user.imageUrl);
 
-    //Manggil API Register
-    //await axios.post(`${api}`)
+    // Manggil API Register
+    // await axios.post(`${api}`)
   };
 
   return (
@@ -48,7 +48,7 @@ export default function DrawerLayout() {
       //   },
       // }}
       screenOptions={{
-        swipeEdgeWidth: Platform.OS === "ios" ? 0 : 10
+        swipeEdgeWidth: Platform.OS === "ios" ? 0 : 10,
       }}
       drawerContent={(props) => <CustomDrawerContent />}
     >
