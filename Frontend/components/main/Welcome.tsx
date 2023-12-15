@@ -12,16 +12,39 @@ import COLORS from "../../constants/colors";
 import { SIZES } from "../../constants/sizes";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import useTweet from "../../hooks/useTweet";
+import { AntDesign } from "@expo/vector-icons";
 
 const Welcome = () => {
   const router = useRouter();
 
-  const jobTypes = ["All", "Lost & Found", "Tweet", "Parking-Info"];
+  const { data, refetch } = useTweet();
+
+  const jobTypes = ["All", "Lost", "Found", "Tweet", "Parking-Info"];
 
   const [activeJobType, setActiveJobType] = useState("All");
 
   const handleClick = () => {
     alert("Hello");
+  };
+
+  const handleFilter = (item: string) => {
+    if (item === "All") {
+      refetch();
+      setActiveJobType("All");
+    } else if (item === "Lost") {
+      //Call API to get category Lost
+      setActiveJobType("Lost");
+    } else if (item === "Found") {
+      //Call API to get category Found
+      setActiveJobType("Found");
+    } else if (item === "Tweet") {
+      //Call API to get category Tweet
+      setActiveJobType("Tweet");
+    } else if (item === "Parking-Info") {
+      //Call API to get category Parking-Info
+      setActiveJobType("Parking-Info");
+    }
   };
 
   return (
@@ -49,6 +72,7 @@ const Welcome = () => {
               resizeMode="contain"
               style={styles.searchBtnImage}
             /> */}
+          <AntDesign name="search1" size={20} color={COLORS.white} />
         </TouchableOpacity>
       </View>
       <View style={styles.tabsContainer}>
@@ -58,8 +82,9 @@ const Welcome = () => {
             <TouchableOpacity
               style={styles.tab(activeJobType, item)}
               onPress={() => {
-                setActiveJobType(item);
-                router.push(`/search/${item}`);
+                // setActiveJobType(item);
+                // router.push(`/search/${item}`);
+                handleFilter(item);
               }}
             >
               <Text style={styles.tabText(activeJobType, item)}>{item}</Text>

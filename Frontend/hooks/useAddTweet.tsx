@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { TweetType } from "../types";
+import { useAuth, useUser } from "@clerk/clerk-expo";
 
 type IUser = {
   id: number;
@@ -46,20 +48,27 @@ const post = {
     " molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
 };
 
+type addTweetParams = {
+  content: string;
+  image?: any;
+};
+
 export default function useAddTweet() {
   const queryClient = useQueryClient();
+  const { user } = useUser();
 
-  const addTweet = async (tweet: string): Promise<IPost> => {
+  const addTweet = async (tweet: addTweetParams): Promise<TweetType> => {
     console.log("add tweet");
     const response = await axios.post(
       "https://jsonplaceholder.typicode.com/posts"
     );
-    alert(tweet);
+    console.log(user.id);
+    alert(tweet.content);
     return response.data;
   };
 
   return useMutation({
-    mutationFn: (params: string) => addTweet(params),
+    mutationFn: (params: addTweetParams) => addTweet(params),
     onSettled: () => {
       // @ts-ignore
       queryClient.invalidateQueries(["tweet"]);

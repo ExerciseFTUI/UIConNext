@@ -6,6 +6,10 @@ import {
 } from "@react-navigation/drawer";
 import { Dimensions, Text } from "react-native";
 import { CustomDrawerContent } from "../../components/CustomDrawerContent";
+import { useEffect } from "react";
+import { useUser } from "@clerk/clerk-expo";
+import axios from "axios";
+import { api } from "../../constants/api";
 
 const DrawerNavigator = createDrawerNavigator().Navigator;
 
@@ -18,6 +22,24 @@ export const unstable_settings = {
 };
 
 export default function DrawerLayout() {
+  const { user } = useUser();
+
+  useEffect(() => {
+    //Register user if first time login
+    registerUser();
+  }, []);
+
+  const registerUser = async () => {
+    console.log(user.id);
+    console.log(user.fullName);
+    console.log(user.firstName);
+    console.log(user.emailAddresses[0]);
+    console.log(user.imageUrl);
+
+    //Manggil API Register
+    //await axios.post(`${api}`)
+  };
+
   return (
     <Drawer
       // screenOptions={{

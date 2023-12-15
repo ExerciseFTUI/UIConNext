@@ -27,11 +27,11 @@ import { api, uri } from "../constants/api";
 //   };
 // };
 
-export default function useTweet() {
+export default function useTweetById(id: string) {
   return useQuery({
-    queryKey: ["tweet"],
+    queryKey: ["tweet", id],
     queryFn: async () => {
-      console.log("Fetching tweet");
+      console.log("Fetching tweet by id");
       // const response = await fetch(
       //   "https://jsonplaceholder.typicode.com/users"
       // );
@@ -43,10 +43,11 @@ export default function useTweet() {
       // const result = response.data;
       console.log(`${api}/test`);
 
+      //Get Post By Id
       const response = await axios.post(`${api}/post/getAllPosts`);
       const result = response.data.result;
 
-      return result as TweetType[] | undefined;
+      return result as TweetType | undefined;
     },
   });
 }
